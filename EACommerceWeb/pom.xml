@@ -111,7 +111,8 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
-       
+
+
         <dependency>
         	<groupId>edu.mum</groupId>
         	<artifactId>EACommerceDomain</artifactId>
