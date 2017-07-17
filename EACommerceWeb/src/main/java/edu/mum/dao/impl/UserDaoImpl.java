@@ -7,5 +7,11 @@ import edu.mum.domain.User;
 
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
