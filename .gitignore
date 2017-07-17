@@ -48,3 +48,4 @@ Temporary Items
 /target/
 EACommerceDomain/target/**
 EACommerceWeb/target/**
+EACommerceIntegration/target/**
