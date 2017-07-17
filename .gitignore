@@ -47,3 +47,4 @@ Temporary Items
 .apdisk
 /target/
 EACommerceDomain/target/**
+EACommerceWeb/target/**
