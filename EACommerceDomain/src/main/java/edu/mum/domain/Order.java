@@ -22,6 +22,7 @@ import javax.persistence.Version;
 @Table(name = "purchaseOrder")
 public class Order implements Serializable {
 
+	private static final long serialVersionUID = -3039679880818308042L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)

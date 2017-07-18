@@ -14,9 +14,6 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-//import edu.mum.validation.EmptyOrSize;
-//import edu.mum.validation.NullMinNumber;
-
 @Entity
 public class SingleOrder implements Serializable {
 
