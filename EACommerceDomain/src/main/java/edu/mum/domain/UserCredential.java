@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@NamedQuery(name="findUserCredential", query="select u from UserCredential u where u.username = :username")
 public class UserCredential {
 	 @Id
 	 @Column(nullable = false, unique = true)

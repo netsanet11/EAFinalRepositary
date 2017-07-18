@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+ 	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+ 	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/integration
+			http://www.springframework.org/schema/integration/spring-integration.xsd
+ 			http://www.springframework.org/schema/integration/amqp 
+ 			http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+     		http://www.springframework.org/schema/integration/jms
+			http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+			http://www.springframework.org/schema/integration/stream
+			http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+			http://www.springframework.org/schema/rabbit
+       		http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+   
+   
+
+	<!-- From EAC To Shipment -->
+ 
+ 	<int-amqp:inbound-channel-adapter channel="fromEACChannel"
+		queue-names="fromEAC" connection-factory="ampqConnectionFactory" />
+		
+	<channel id="fromEACChannel"></channel>
+	
+	<transformer ref="orderTransformer"  input-channel="fromEACChannel" method="transformToShipment"
+		output-channel="toShipmentChannel" />
+	
+	<channel id="toShipmentChannel"></channel>
+	
+	<int-amqp:outbound-channel-adapter
+		channel="toShipmentChannel" amqp-template="amqpTemplate" exchange-name="testExchange"
+		routing-key="toShipment.key" />
+		
+	<!-- From Shipment To EAC -->
+ 
+ 	<int-amqp:inbound-channel-adapter channel="fromShipmentChannel"
+		queue-names="fromShipment" connection-factory="ampqConnectionFactory" />
+		
+	<channel id="fromShipmentChannel"></channel>
+	
+	<transformer ref="orderTransformer"  input-channel="fromShipmentChannel" method="transformToEac"
+		output-channel="toEACChannel" />
+	
+	<channel id="toEACChannel"></channel>
+	
+	<int-amqp:outbound-channel-adapter
+		channel="toEACChannel" amqp-template="amqpTemplate" exchange-name="testExchange"
+		routing-key="toEAC.key" />
+	
+	<!-- Infrastructure -->
+
+	<beans:bean id="orderTransformer" class="edu.mum.transformer.OrderTransformerImpl"/>
+	
+	<rabbit:connection-factory id="ampqConnectionFactory" host="localhost" username="guest" password="guest"/>
+	
+
+	<rabbit:admin connection-factory="ampqConnectionFactory" />
+
+	<rabbit:queue name="fromEAC" />
+	<rabbit:queue name="toEAC" />
+	<rabbit:queue name="fromShipment" />
+	<rabbit:queue name="toShipment" />
+
+	<rabbit:direct-exchange name="testExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="fromEAC" key="fromEAC.key" />
+			<rabbit:binding queue="toEAC" key="toEAC.key" />
+			<rabbit:binding queue="fromShipment" key="fromShipment.key" />
+			<rabbit:binding queue="toShipment" key="toShipment.key" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	
+	<rabbit:template id="amqpTemplate" connection-factory="ampqConnectionFactory"
+                     reply-timeout="2000" 
+                     exchange="testExchange"/>
+ 
+ </beans:beans>

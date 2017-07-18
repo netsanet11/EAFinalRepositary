@@ -1,0 +1,58 @@
+package edu.mum.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import edu.mum.domain.User;
+import edu.mum.service.UserService;
+
+@Controller
+@RequestMapping({"/members"})
+public class UserController {
+	
+	@Autowired
+	private UserService  userService;
+
+	@RequestMapping
+	public String listMembers(Model model) {
+		model.addAttribute("members", userService.findAll());
+		return "members";
+	}
+	
+  	@RequestMapping("/{id}")
+	public String getMemberById(@PathVariable("id") Long id,Model model) {
+		User member = userService.findOne(id);
+		model.addAttribute("member", member);
+
+ 		return "member";
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String getAddNewMemberForm(@ModelAttribute("newMember") User newMember) {
+	   return "addMember";
+	}
+	   
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String processAddNewMemberForm( @Valid @ModelAttribute("newMember") User memberToBeAdded, BindingResult result) {
+ 
+		if(result.hasErrors()) {
+			return "addMember";
+		}
+
+			 //  Error caught by ControllerAdvice IF no authorization...
+			userService.saveFull(memberToBeAdded);
+
+	   	return "redirect:/members";
+ 
+	}
+	
+ 
+}

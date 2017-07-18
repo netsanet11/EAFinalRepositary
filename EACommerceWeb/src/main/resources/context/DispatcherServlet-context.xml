@@ -8,17 +8,27 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven>
- 	 	<mvc:message-converters>
-		    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		        <property name="objectMapper">
-		            <bean class="edu.mum.rest.HibernateAwareObjectMapper" />
-		        </property>
-		    </bean>
-		</mvc:message-converters>
- 	</mvc:annotation-driven> 
+ 	<mvc:annotation-driven validator="validator"/>
  
-
  	<context:component-scan base-package="edu.mum.controller" />
  	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+ 
+	<mvc:resources  location="/resources/"  mapping="/resource/**"/>
+ 
+  
+  	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames" value="classpath:messages,classpath:errorMessages" />
+	</bean>
+ 
+  
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
   </beans>
