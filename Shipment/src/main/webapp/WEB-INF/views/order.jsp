@@ -19,15 +19,24 @@
 			</div>
    			
  							<div class="pull-left"> <h3>${SpecialBlurb}</h3> </div>
+ 				<form:form  modelAttribute="newMember" class="form-horizontal"  >			
  				<select id="status" name="status" class="btn btn-danger btn-mini pull-right">
-				   <option value="Undelivery">
+
+				   <option value="Undelivery" ${order.status == 'Undelivery' ? 'selected="selected"' : ''}>
 						Undelivery
-				</option>
-				   <option value="Delivering">Delivering</option>
-				   <option value="Preparing">Preparing</option>
-				   <option value="Delivered">Delivered</option>
+				   </option>
+				   <option value="Delivering" ${order.status == 'Delivering' ? 'selected="selected"' : ''}>
+						Delivering
+				   </option>
+				   <option value="Preparing" ${order.status == 'Preparing' ? 'selected="selected"' : ''}>
+						Preparing
+				   </option>
+				   <option value="Delivered" ${order.status == 'Delivered' ? 'selected="selected"' : ''}>
+						Delivered
+				   </option>
 				</select>				
  				<a href="<spring:url value="/orders/update" />" class="btn btn-danger btn-mini pull-right">Change Status of Oder</a>	
+ 				</form:form>
  				<br>
  		</div>
 	</section>

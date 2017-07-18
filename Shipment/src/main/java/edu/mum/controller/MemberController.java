@@ -39,38 +39,26 @@ public class MemberController {
 
  		return "order";
 	}
-//	protected Map referenceData(HttpServletRequest request) throws Exception {
-//
-//		Map referenceData = new HashMap();
-//
-//		Map<String,String> country = new LinkedHashMap<String,String>();
-//		country.put("US", "United Stated");
-//		country.put("CHINA", "China");
-//		country.put("SG", "Singapore");
-//		country.put("MY", "Malaysia");
-//		referenceData.put("statusList", country);
-//		
-//		return referenceData;
-//	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewMemberForm(@ModelAttribute("newMember") SingleOrder newMember) {
-	   return "addMember";
-	}
-	   
-//	@RequestMapping(value = "/add", method = RequestMethod.POST)
-//	public String processAddNewMemberForm( @Valid @ModelAttribute("newMember") Order memberToBeAdded, BindingResult result) {
-// 
-//		if(result.hasErrors()) {
-//			return "addMember";
-//		}
-//
-//			 //  Error caught by ControllerAdvice IF no authorization...
-//			memberService.saveFull(memberToBeAdded);
-//
-//	   	return "redirect:/members";
-// 
+//	@RequestMapping(value = "/add", method = RequestMethod.GET)
+//	public String getAddNewMemberForm(@ModelAttribute("newMember") SingleOrder newMember) {
+//	   return "addMember";
 //	}
+	   
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String processNewShipmentForm( @Valid @ModelAttribute("newShipment") SingleOrder orderToBeUpdate, BindingResult result) {
+ 
+		if(result.hasErrors()) {
+			return "order";
+		}
+		System.out.println("orderToBeUpdate :" + orderToBeUpdate.getStatus());
+
+			 //  Error caught by ControllerAdvice IF no authorization...
+		//	memberService.saveFull(memberToBeAdded);
+
+	   	return "orders";
+ 
+	}
 	
  
 }
