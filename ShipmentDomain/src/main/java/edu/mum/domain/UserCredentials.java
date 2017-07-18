@@ -1,5 +1,6 @@
 package edu.mum.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,65 +11,71 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
- 
 @Entity(name = "CREDENTIALS")
-public class UserCredentials {
+public class UserCredentials implements Serializable {
 
-	 @Id
-	 @Column(nullable = false, unique = true)
- 	String username;
-	 @Column(nullable = false)
+	private static final long serialVersionUID = 6253265484907027208L;
+
+	@Id
+	@Column(nullable = false, unique = true)
+	String username;
+	@Column(nullable = false)
 	String password;
 	String verifyPassword;
 	Boolean enabled;
 
-//	@OneToOne(mappedBy="userCredentials", cascade = CascadeType.PERSIST) 
-// 	private Order member;
-	
+	// @OneToOne(mappedBy="userCredentials", cascade = CascadeType.PERSIST)
+	// private Order member;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="credentials_id") 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "credentials_id")
 	List<Authority> authority = new ArrayList<Authority>();
 
- 	public String getUsername() {
-		return username;
+	public String getUsername() {
+		return this.username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getVerifyPassword() {
-		return verifyPassword;
+		return this.verifyPassword;
 	}
+
 	public void setVerifyPassword(String verifyPassword) {
 		this.verifyPassword = verifyPassword;
 	}
+
 	public Boolean getEnabled() {
-		return enabled;
+		return this.enabled;
 	}
+
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+
 	public List<Authority> getAuthority() {
-		return authority;
+		return this.authority;
 	}
+
 	public void setAuthority(List<Authority> authority) {
 		this.authority = authority;
 	}
-//	public Order getMember() {
-//		return member;
-//	}
-//	public void setMember(Order member) {
-//		this.member = member;
-//	}
- 
- 	
+	// public Order getMember() {
+	// return member;
+	// }
+	// public void setMember(Order member) {
+	// this.member = member;
+	// }
+
 }

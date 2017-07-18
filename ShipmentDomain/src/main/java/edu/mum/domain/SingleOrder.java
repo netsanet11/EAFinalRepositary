@@ -1,5 +1,7 @@
 package edu.mum.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +14,10 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-//import edu.mum.validation.EmptyOrSize;
-//import edu.mum.validation.NullMinNumber;
-
 @Entity
-public class SingleOrder {
+public class SingleOrder implements Serializable {
+
+	private static final long serialVersionUID = -7666145643422026254L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

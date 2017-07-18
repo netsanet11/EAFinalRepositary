@@ -9,6 +9,7 @@ import edu.mum.domain.UserInfo;
 public class OrderTransformerImpl implements OrderTransformer {
 
 	public SingleOrder transformToShipment(Order order) {
+		System.out.println("transformer!");
 		SingleOrder singleOrder = new SingleOrder();
 
 		singleOrder.setExternalId(order.getId());
@@ -16,13 +17,18 @@ public class OrderTransformerImpl implements OrderTransformer {
 		UserInfo userInfo = new UserInfo();
 
 		User user = order.getUser();
-		userInfo.setUserName(user.getEmail());
+		if (user != null) {
+
+			userInfo.setUserName(user.getEmail());
+		}
 
 		Address address = order.getAddress();
-		userInfo.setCity(address.getCity());
-		userInfo.setState(address.getState());
-		userInfo.setStreet(address.getStreet());
-		userInfo.setZipCode(address.getZipCode());
+		if (address != null) {
+			userInfo.setCity(address.getCity());
+			userInfo.setState(address.getState());
+			userInfo.setStreet(address.getStreet());
+			userInfo.setZipCode(address.getZipCode());
+		}
 
 		singleOrder.setUserInfo(userInfo);
 
