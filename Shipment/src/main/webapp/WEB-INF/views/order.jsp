@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
- 
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -17,43 +17,64 @@
 				<h1>One Order</h1>
 				<p>The Specific of This Order</p>
 			</div>
-   			
- 							<div class="pull-left"> <h3>${SpecialBlurb}</h3> </div>
- 				<form:form  modelAttribute="newMember" class="form-horizontal"  >			
- 				<select id="status" name="status" class="btn btn-danger btn-mini pull-right">
 
-				   <option value="Undelivery" ${order.status == 'Undelivery' ? 'selected="selected"' : ''}>
-						Undelivery
-				   </option>
-				   <option value="Delivering" ${order.status == 'Delivering' ? 'selected="selected"' : ''}>
-						Delivering
-				   </option>
-				   <option value="Preparing" ${order.status == 'Preparing' ? 'selected="selected"' : ''}>
-						Preparing
-				   </option>
-				   <option value="Delivered" ${order.status == 'Delivered' ? 'selected="selected"' : ''}>
-						Delivered
-				   </option>
-				</select>				
- 				<a href="<spring:url value="/orders/update" />" class="btn btn-danger btn-mini pull-right">Change Status of Oder</a>	
- 				</form:form>
- 				<br>
- 		</div>
+			<div class="pull-left">
+				<h3>${SpecialBlurb}</h3>
+			</div>
+			<br>
+		</div>
 	</section>
 
 	<section class="container">
 		<div class="row">
- 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-					<div class="thumbnail">
- 						<div class="caption">
-							<h3>Product Name - ${order.productName}</h3>
-							<p>Quantity -         ${order.quantity}</p>
-							<p>Status - ${order.status}</p>
-
-						</div>
+			<form class="form-horizontal"
+				action="<spring:url value="/orders/update"></spring:url>"
+				method="post">
+				<sec:csrfInput />
+				<fieldset>
+					<div class="form-group">
+						<label class="control-label col-lg-2" for="id">id</label>
+						<input id="id" class="form:input-large" placeholder="id"
+							name='id' type="text" value="${order.id}" readonly>
 					</div>
-				</div>
- 
+					<div class="form-group">
+						<label class="control-label col-lg-2" for="orderNumber">orderId</label>
+						<input id="orderNumber" class="form:input-large" placeholder="OrderNumber"
+							name='orderNumber' type="text" value="${order.orderNumber}" readonly>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2" for="quantity">Quantity</label>
+						<input id="quantity" class="form:input-large" placeholder="Quantity"
+							name='Quantity' type="text" value="${order.quantity}" readonly>
+					</div>
+					<label class="control-label col-lg-2" for="status">Delivery Status</label>
+					<select id="status" name="status" class="btn btn-danger pull-left">
+
+						<option value="Undelivery"
+							${order.status == 'Undelivery' ? 'selected="selected"' : ''}>
+						Undelivery
+				   </option>
+						<option value="Delivering"
+							${order.status == 'Delivering' ? 'selected="selected"' : ''}>
+						Delivering
+				   </option>
+						<option value="Preparing"
+							${order.status == 'Preparing' ? 'selected="selected"' : ''}>
+						Preparing
+				   </option>
+						<option value="Delivered"
+							${order.status == 'Delivered' ? 'selected="selected"' : ''}>
+						Delivered
+				   </option>
+					</select>
+					<br>
+					<hr>
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnUpdate" class="btn btn-primary"
+							value="Update" />
+					</div>
+				</fieldset>
+			</form>
 		</div>
 	</section>
 </body>

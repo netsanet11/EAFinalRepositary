@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.mum.domain.Product;
+import edu.mum.domain.Orders;
 
  
 
 public interface ProductRepositoryLite {
 
-	List <Product> getAllProducts();
+	List <Orders> getAllProducts();
 	
-	Product getProductById(String key);
+	Orders getProductById(String key);
 	
-	List<Product> getProductsByCategory(String category);
+	List<Orders> getProductsByCategory(String category);
 
-	Set<Product> getProductsByFilter(Map<String, List<String>> filterParams);
+	Set<Orders> getProductsByFilter(Map<String, List<String>> filterParams);
 	
-	void addProduct(Product product);		
+	void addProduct(Orders product);		
 }

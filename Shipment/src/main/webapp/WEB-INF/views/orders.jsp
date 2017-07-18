@@ -40,7 +40,7 @@
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
 					<div class="thumbnail">
  						<div class="caption">
-							<h4>Product Name - ${order.productName}</h4>
+							<h4>Product Name - ${order.orderNumber}</h4>
 							<h4>Order Status -  ${order.status}
 						 <a href="<spring:url value="/orders/${order.id}" />" class="btn btn-primary  btn-mini  ">View</a>
  				</h4>

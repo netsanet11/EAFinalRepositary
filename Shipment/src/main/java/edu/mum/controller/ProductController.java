@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.mum.domain.Product;
+import edu.mum.domain.Orders;
 import edu.mum.service.ProductService;
 
 @Controller
@@ -31,19 +31,19 @@ public class ProductController {
  	@RequestMapping("/product")
 	public String getProductById(Model model, @RequestParam("id") Long id) {
 
-		Product product = productService.findOne(id);
+		Orders product = productService.findOne(id);
 		model.addAttribute("product", product);
 		return "product";
 	}
 
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
+	public String getAddNewProductForm(@ModelAttribute("newProduct") Orders newProduct) {
 	   return "addProduct";
 	}
 	   
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm( @Valid @ModelAttribute("newProduct") Product productToBeAdded, BindingResult result) {
+	public String processAddNewProductForm( @Valid @ModelAttribute("newProduct") Orders productToBeAdded, BindingResult result) {
 		if(result.hasErrors()) {
 			return "addProduct";
 		}

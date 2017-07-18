@@ -11,16 +11,16 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.domain.SingleOrder;
-import edu.mum.domain.Product;
+import edu.mum.domain.Orders;
 
 import edu.mum.dao.ProductDao;
 
 	@Repository
-	public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao
+	public class ProductDaoImpl extends GenericDaoImpl<Orders> implements ProductDao
 	{
 		
 		public ProductDaoImpl() {
-			super.setDaoType(Product.class );
+			super.setDaoType(Orders.class );
 			}
 
 

@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.mum.domain.Product;
+import edu.mum.domain.Orders;
 
 public interface ProductService {
 
-	List<Product> getAllProducts();
+	List<Orders> getAllProducts();
 
-  	void save(Product product);
+  	void save(Orders product);
 
-	Product findOne(long id);
+	Orders findOne(long id);
  
  
 

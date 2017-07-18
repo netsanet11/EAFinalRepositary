@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mum.domain.Product;
+import edu.mum.domain.Orders;
 import edu.mum.dao.ProductDao;
 import edu.mum.service.ProductService;
 
@@ -20,16 +20,16 @@ public class ProductServiceImpl implements ProductService{
  	@Autowired
 	private ProductDao productDao;
 
-	public List<Product> getAllProducts() {
+	public List<Orders> getAllProducts() {
 		return productDao.findAll();
 	}
 
  
- 	public void save(Product product) {
+ 	public void save(Orders product) {
 		   productDao.save(product);
 	}
 	
-	public Product findOne(long productID) {
+	public Orders findOne(long productID) {
 		return productDao.findOne(productID);
 	}
 
