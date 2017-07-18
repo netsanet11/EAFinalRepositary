@@ -5,6 +5,6 @@ import java.util.Set;
 
 import edu.mum.domain.SingleOrder;
 
-public interface MemberDao extends GenericDao<SingleOrder> {
+public interface OrderDao extends GenericDao<SingleOrder> {
       
  	}

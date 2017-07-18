@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mum.dao.MemberDao;
+import edu.mum.dao.OrderDao;
 import edu.mum.domain.SingleOrder;
 import edu.mum.service.UserCredentialsService;
 
 @Service
 @Transactional 
-public class MemberServiceImpl implements edu.mum.service.MemberService {
+public class OrderServiceImpl implements edu.mum.service.OrderService {
 	
  	@Autowired
-	private MemberDao memberDao;
+	private OrderDao orderDao;
 
  	@Autowired
  	UserCredentialsService credentialsService;
 
-    public void save( SingleOrder member) {  		
-		memberDao.save(member);
+    public void save( SingleOrder order) {  		
+		orderDao.save(order);
 	}
 	
  	
@@ -31,13 +31,17 @@ public class MemberServiceImpl implements edu.mum.service.MemberService {
 //  		memberDao.save(member);
 //	}
   	
-
+    @Override
+    public void update(SingleOrder singleOrder) {
+    	orderDao.update(singleOrder);
+    	return;
+    }
 	public List<SingleOrder> findAll() {
-		return (List<SingleOrder>)memberDao.findAll();
+		return (List<SingleOrder>)orderDao.findAll();
 	}
 
  	public SingleOrder findOne(Long id) {
-		return memberDao.findOne(id);
+		return orderDao.findOne(id);
 	}
 	
  

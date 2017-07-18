@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.domain.SingleOrder;
-import edu.mum.service.MemberService;
+import edu.mum.service.OrderService;
 
 @Controller
 @RequestMapping({"/orders"})
-public class MemberController {
+public class OrderController {
 	
 	@Autowired
-	private MemberService  memberService;
+	private OrderService  orderService;
 
 	@RequestMapping
-	public String listMembers(Model model) {
-		model.addAttribute("orders", memberService.findAll());
+	public String listOrders(Model model) {
+		model.addAttribute("orders", orderService.findAll());
 		return "orders";
 	}
 	
   	@RequestMapping("/{id}")
-	public String getMemberById(@PathVariable("id") Long id,Model model) {
-		SingleOrder order = memberService.findOne(id);
+	public String getOrderById(@PathVariable("id") Long id,Model model) {
+		SingleOrder order = orderService.findOne(id);
 		model.addAttribute("order", order);
 
  		return "order";
@@ -46,17 +46,14 @@ public class MemberController {
 //	}
 	   
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String processNewShipmentForm( @Valid @ModelAttribute("newShipment") SingleOrder orderToBeUpdate, BindingResult result) {
+	public String processNewShipmentForm( SingleOrder orderToBeUpdate,  Model model) {
  
-		if(result.hasErrors()) {
-			return "order";
-		}
-		System.out.println("orderToBeUpdate :" + orderToBeUpdate.getStatus());
+		System.out.println(orderToBeUpdate.getOrderNumber());
+		System.out.println(orderToBeUpdate.getQuantity());
+		System.out.println(orderToBeUpdate.getStatus());
+		orderService.update(orderToBeUpdate);
 
-			 //  Error caught by ControllerAdvice IF no authorization...
-		//	memberService.saveFull(memberToBeAdded);
-
-	   	return "orders";
+		return "redirect:/orders";
  
 	}
 	

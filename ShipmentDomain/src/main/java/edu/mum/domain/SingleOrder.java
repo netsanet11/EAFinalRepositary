@@ -37,18 +37,15 @@ public class SingleOrder {
 	
 	@Column(length = 16)
 	@NotEmpty
-	private String productName;
+	private String orderNumber;
+
 	@Column
 	private Integer quantity;
+	@OneToOne(fetch=FetchType.EAGER,  cascade = {CascadeType.ALL})
+	@JoinColumn(name="orderId") 
+	private UserInfo userInfo;
+	
  	
-//	private UserInfo userInfo;
-//
-// 	public UserInfo getUserInfo() {
-//		return userInfo;
-//	}
-//	public void setUserInfo(UserInfo userInfo) {
-//		this.userInfo = userInfo;
-//	}
 	public long getId() {
 		return id;
 	}
@@ -67,11 +64,17 @@ public class SingleOrder {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public String getProductName() {
-		return productName;
+	public String getOrderNumber() {
+		return orderNumber;
 	}
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 	
   }

@@ -5,11 +5,10 @@ import java.util.Set;
 
 import edu.mum.domain.SingleOrder;
  
-public interface MemberService {
+public interface OrderService {
 
-	public void save(SingleOrder member);
+	public void update(SingleOrder singleOrder);
 //    	public void saveFull( Order member);  		
-
 	public List<SingleOrder> findAll();
  	public SingleOrder findOne(Long id);
  		

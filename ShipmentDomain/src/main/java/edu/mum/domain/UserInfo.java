@@ -1,5 +1,6 @@
 package edu.mum.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,12 +18,15 @@ public class UserInfo {
 	@GeneratedValue(strategy=GenerationType.AUTO)
  	private long id;
 
-//	@EmptyOrSize(min=5, max = 9, message= "{EmptyOrSize}")
+    @Column
  	private String street;
+    @Column
 	private String city;	
+    @Column
  	private String state;
+    @Column
   	private String zipCode;
-
+    @Column
   	private String userName;
   	
 	public String getUserName() {
