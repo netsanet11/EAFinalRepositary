@@ -28,11 +28,13 @@ public class LoginController {
 	public String PostLogin(UserCredential credentials, Model model) {
 		System.out.println(credentials.getUsername() + credentials.getPassword());
 		UserCredential validCredentials = credentialsService.findByUserName(credentials.getUsername());
+		System.out.println(validCredentials.getUsername());
 		
 		if (validCredentials == null)
 			return  "login";
  
-		model.addAttribute("member", validCredentials.getMember());
+		System.out.println(validCredentials.getMember().getFirstName());
+		model.addAttribute("user", validCredentials.getMember());
  		return "redirect:/welcome";
 	}
  

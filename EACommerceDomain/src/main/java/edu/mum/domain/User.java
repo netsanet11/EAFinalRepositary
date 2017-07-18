@@ -59,6 +59,15 @@ public class User implements Serializable {
   
  	@OneToMany(mappedBy="user",fetch=FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })  
     private List<Address> addresses = new ArrayList<Address>();
+ 	
+ 	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+ 	private List<Order> orders = new ArrayList<Order>();
 
  	public long getId() {
 		return id;

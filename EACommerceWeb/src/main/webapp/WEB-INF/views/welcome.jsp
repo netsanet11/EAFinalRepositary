@@ -13,13 +13,13 @@
 			<div class="container">
 				<h1> ${greeting} </h1>
 				<p> ${tagline} </p>
-  					Welcome  ${member.firstName} !
+  					Welcome  ${user.firstName} !
  
 			</div>	 
  
 				  <div class="container">
 					<c:choose>
-					    <c:when test="${empty member}">
+					    <c:when test="${empty user}">
       					<a href="<spring:url value='/login' />" class="btn btn-default pull-right"> Login</a>
 					    </c:when>
 					    <c:otherwise>

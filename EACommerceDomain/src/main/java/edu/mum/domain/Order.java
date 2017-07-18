@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
@@ -40,9 +41,31 @@ public class Order implements Serializable {
 	   @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	   @JoinColumn(name="order_id") 
 	   private Address address;
+	   
+		@ManyToOne(fetch=FetchType.EAGER)
+	    @JoinColumn (name="user_id") 
+	  	private User  user;
+	  	
+		public enum orderStatus  {INTRANSIT, DELIVERED, INPROCESS};
 
 	 /*  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	   private Set<OrderPayment> payments = new HashSet<OrderPayment>();*/
+
+	public Address getAddress() {
+			return address;
+		}
+
+		public void setAddress(Address address) {
+			this.address = address;
+		}
+
+		public User getUser() {
+			return user;
+		}
+
+		public void setUser(User user) {
+			this.user = user;
+		}
 
 	public Long getId() {
 		return id;

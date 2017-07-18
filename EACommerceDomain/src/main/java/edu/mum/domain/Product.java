@@ -18,10 +18,9 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Product implements Serializable {
 	 private static final long serialVersionUID = 5784L;
-
 		@Id
 		@GeneratedValue(strategy=GenerationType.AUTO)
-	     private long id;
+	    private long id;
 		private String name;
 	    private String description;
 	    private String productId;
