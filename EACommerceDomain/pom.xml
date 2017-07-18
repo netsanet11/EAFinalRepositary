@@ -3,6 +3,7 @@
   <groupId>edu.mum</groupId>
   <artifactId>EACommerceDomain</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
   
   <dependencyManagement>
         <dependencies>

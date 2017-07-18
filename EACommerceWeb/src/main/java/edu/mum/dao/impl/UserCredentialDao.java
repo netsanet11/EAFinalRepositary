@@ -2,8 +2,10 @@ package edu.mum.dao.impl;
 
 import java.util.List;
 
-import edu.mum.domain.UserCredential;
+import org.springframework.stereotype.Repository;
 
+import edu.mum.domain.UserCredential;
+@Repository
 public class UserCredentialDao extends GenericDaoImpl<UserCredential> implements edu.mum.dao.UserCredentialDao {
 
 	@Override
