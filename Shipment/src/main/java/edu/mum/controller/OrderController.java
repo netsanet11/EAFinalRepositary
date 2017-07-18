@@ -25,6 +25,8 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService  orderService;
+	
+	private SingleOrder order;
 
 	@RequestMapping
 	public String listOrders(Model model) {
@@ -34,24 +36,22 @@ public class OrderController {
 	
   	@RequestMapping("/{id}")
 	public String getOrderById(@PathVariable("id") Long id,Model model) {
-		SingleOrder order = orderService.findOne(id);
+		order = orderService.findOne(id);
+		System.out.println(order.getUserInfo().getCity());
 		model.addAttribute("order", order);
 
  		return "order";
 	}
 	
-//	@RequestMapping(value = "/add", method = RequestMethod.GET)
-//	public String getAddNewMemberForm(@ModelAttribute("newMember") SingleOrder newMember) {
-//	   return "addMember";
-//	}
 	   
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String processNewShipmentForm( SingleOrder orderToBeUpdate,  Model model) {
  
-		System.out.println(orderToBeUpdate.getOrderNumber());
-		System.out.println(orderToBeUpdate.getQuantity());
-		System.out.println(orderToBeUpdate.getStatus());
-		orderService.update(orderToBeUpdate);
+		System.out.println(order.getQuantity());
+		System.out.println(order.getStatus());
+		System.out.println(order.getUserInfo());
+		order.setStatus(orderToBeUpdate.getStatus());
+		orderService.update(order);
 
 		return "redirect:/orders";
  

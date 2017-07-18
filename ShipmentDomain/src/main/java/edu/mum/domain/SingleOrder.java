@@ -26,7 +26,6 @@ public class SingleOrder {
 	private String status;
 
 	@Column
-	@NotEmpty
 	private Long externalId;
 
 	@Column
