@@ -24,7 +24,7 @@ public class ProductController {
  
  	@RequestMapping({"","/all"})
 	public String list(Model model) {
-	//	model.addAttribute("products", productService.getAllProducts());
+		model.addAttribute("products", productService.findAll());
 		return "products";
 	}
 	
