@@ -49,3 +49,5 @@ Temporary Items
 EACommerceDomain/target/**
 EACommerceWeb/target/**
 EACommerceIntegration/target/**
+ShipmentDomain/target/**
+Shipment/target/**
