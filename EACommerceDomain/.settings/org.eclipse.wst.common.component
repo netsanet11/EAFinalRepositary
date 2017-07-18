@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="EACommerceDomain">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
+<<<<<<< HEAD
+=======
+        <wb-resource deploy-path="/" source-path="/src/main/resources"/>
+>>>>>>> 00bb052dd8c7f03bdf328c34ea2385966ff55dab
     </wb-module>
 </project-modules>
