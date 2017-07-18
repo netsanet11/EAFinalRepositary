@@ -24,8 +24,11 @@ public class OrderController {
 		model.addAttribute("orders", this.orderService.findAll());
 		return "orders";
 	}
+	
+    @RequestMapping("/{id}")
+    public String getOrderById(@PathVariable("id") Long id,Model model) {
+        order = orderService.findOne(id);
 		model.addAttribute("order", order);
-
 		return "order";
 	}
 	
