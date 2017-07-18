@@ -1,8 +1,5 @@
 package edu.mum.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;

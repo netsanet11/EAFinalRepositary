@@ -7,7 +7,7 @@
         <dependent-module archiveName="EACommerceDomain-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/EACommerceDomain/EACommerceDomain">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="java-output-path" value="/MemberSpringMVC/target/classes"/>
-        <property name="context-root" value="EACommerceWeb"/>
+        <property name="java-output-path" value="/EACommerceWeb/target/classes"/>
+        <property name="context-root" value="MemberSpringMVC"/>
     </wb-module>
 </project-modules>
