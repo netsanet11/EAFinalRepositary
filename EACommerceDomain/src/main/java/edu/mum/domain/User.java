@@ -41,8 +41,14 @@ public class User implements Serializable {
 	@NotEmpty
 	private String title;
 	
-	//@NullMinNumber(value=6)
- 	private Integer memberNumber;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Column
+	private String email;
 
 	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL) 
  	@JoinColumn(name="member_id") 
@@ -96,12 +102,7 @@ public class User implements Serializable {
 		this.addresses.add(address);
 		address.setMember(this);
 	}
-	public Integer getMemberNumber() {
-		return memberNumber;
-	}
-	public void setMemberNumber(Integer memberNumber) {
-		this.memberNumber = memberNumber;
-	}
+	
 	public void setAge(Integer age) {
 		this.age = age;
 	}

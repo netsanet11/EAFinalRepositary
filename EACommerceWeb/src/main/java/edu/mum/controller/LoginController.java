@@ -26,9 +26,9 @@ public class LoginController {
 	
 	@RequestMapping(value="/postLogin", method = RequestMethod.POST)
 	public String PostLogin(UserCredential credentials, Model model) {
-
+		System.out.println(credentials.getUsername() + credentials.getPassword());
 		UserCredential validCredentials = credentialsService.findByUserName(credentials.getUsername());
- 
+		
 		if (validCredentials == null)
 			return  "login";
  
