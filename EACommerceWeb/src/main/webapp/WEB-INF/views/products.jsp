@@ -22,8 +22,20 @@
          </p>       	
        
 			</div>
+
 		</div>	
 		
+
+		</div>
+		</aside>
+		<aside>	
+	<p>	
+								<a href=" <spring:url value="/checkout" /> "
+									class="btn btn-primary"> <span class="glyphicon" /></span> Check out
+								</a>
+							</p>
+	</aside>
+>>>>>>> origin/master
 	</section>
 
 	<section class="container">

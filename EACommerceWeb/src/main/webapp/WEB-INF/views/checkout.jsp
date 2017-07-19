@@ -40,7 +40,7 @@
 <section>
 <p>
 								<a
-									href=" <spring:url value="/orders/submit" /> "
+									href=" <spring:url value="/checkout/submit" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sign glyphicon" /></span> Submit Order
 								</a>

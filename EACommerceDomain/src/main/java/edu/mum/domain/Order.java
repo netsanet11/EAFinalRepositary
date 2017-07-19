@@ -34,11 +34,11 @@ public class Order implements Serializable {
 	@Column
 	private String orderNumber;
 
-	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<OrderItem> items = new HashSet<OrderItem>();
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@ManyToOne(fetch = FetchType.EAGER)
