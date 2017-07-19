@@ -24,20 +24,6 @@ public class LoginController {
 	}
  
 	
-	@RequestMapping(value="/postLogin", method = RequestMethod.POST)
-	public String PostLogin(UserCredential credentials, Model model) {
-		System.out.println(credentials.getUsername() + credentials.getPassword());
-		UserCredential validCredentials = credentialsService.findByUserName(credentials.getUsername());
-		System.out.println(validCredentials.getUsername());
-		
-		if (validCredentials == null)
-			return  "login";
- 
-		System.out.println(validCredentials.getMember().getFirstName());
-		model.addAttribute("user", validCredentials.getMember());
- 		return "redirect:/welcome";
-	}
- 
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
 	public String loginerror(Model model) {
  
