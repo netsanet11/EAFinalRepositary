@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.mum.domain.Order;
 import edu.mum.domain.OrderItem;
@@ -22,14 +21,14 @@ import edu.mum.service.UserService;
 
 @Controller
 @RequestMapping("/products")
-public class ProductController {
-	
+public class ShoppingController {
+
 	@Autowired
 	private ProductService productService;
-	
+
 	private UserService userService;
- 
- 	@RequestMapping({"","/all"})
+
+	@RequestMapping({ "", "/all" })
 	public String list(Model model, HttpServletRequest httpServletRequest) {
 		model.addAttribute("products", productService.findAll());
 		User user = new User();
@@ -37,8 +36,8 @@ public class ProductController {
 		httpServletRequest.getSession().setAttribute("testuser", user);
 		return "products";
 	}
-	
- 	@RequestMapping("/product")
+
+	@RequestMapping("/product")
 	public String getProductById(Model model, @RequestParam("id") Long id) {
 
 		Product product = productService.findOne(id);
@@ -46,43 +45,43 @@ public class ProductController {
 		return "product";
 	}
 
-	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
-	   return "addProduct";
+		return "addProduct";
 	}
-	   
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm( @Valid @ModelAttribute("newProduct") Product productToBeAdded, BindingResult result) {
-		if(result.hasErrors()) {
+	public String processAddNewProductForm(@Valid @ModelAttribute("newProduct") Product productToBeAdded,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "addProduct";
 		}
 
- 		try {
+		try {
 			productService.save(productToBeAdded);
 		} catch (Exception up) {
-	      System.out.println("Transaction Failed!!!");
- 
+			System.out.println("Transaction Failed!!!");
+
 		}
-		
-	   	return "redirect:/products";
+
+		return "redirect:/products";
 	}
+
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
-	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest){
+	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest) {
 		productService.findOne(productId);
-		
+
 		Product findOne = productService.findOne(productId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
-		User user = (User)httpServletRequest.getSession().getAttribute("testuser");
+		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
 		Order order = new Order();
 		orderItem.setOrder(order);
 		user.getOrders().add(order);
-		
-		return "products";
-		
+
+		return "redirect:/products";
+
 	}
-	
-   
+
 }

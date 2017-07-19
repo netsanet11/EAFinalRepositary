@@ -10,12 +10,22 @@
 </head>
 <body>
 	<section>
-		<div class="jumbotron">
+		<aside><div class="jumbotron">
 			<div class="container">
 				<h1>Products</h1>
 				<p>All the available products in our store</p>
 			</div>
 		</div>
+		</aside>
+		<aside>	
+	<p>	
+								<a
+									href=" <spring:url value="/orders" /> 
+									class="btn btn-primary"> <span
+									class="glyphicon" /></span> Check out
+								</a>
+							</p>
+	</aside>
 	</section>
 
 	<section class="container">
@@ -42,14 +52,6 @@
 			</c:forEach>
 		</div>
 	</section>
-	<section>	
-	<p>	
-								<a
-									href=" <spring:url value="/orders" /> 
-									class="btn btn-primary"> <span
-									class="glyphicon-info-sign glyphicon" /></span> Check out
-								</a>
-							</p>
-	</section>
+	
 </body>
 </html>

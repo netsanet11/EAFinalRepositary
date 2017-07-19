@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/orders")
-public class OrderController {
+public class CheckoutController {
 
 	public String checkoutOrder(Model model) {
 
