@@ -17,7 +17,6 @@ import edu.mum.domain.OrderItem;
 import edu.mum.domain.Product;
 import edu.mum.domain.User;
 import edu.mum.service.ProductService;
-import edu.mum.service.UserService;
 
 @Controller
 @RequestMapping("/shop")
@@ -28,7 +27,7 @@ public class ShoppingController {
 
 	@RequestMapping({ "", "/all" })
 	public String list(Model model, HttpServletRequest httpServletRequest) {
-		model.addAttribute("products", productService.findAll());
+		model.addAttribute("products", this.productService.findAll());
 		if (httpServletRequest.getSession().getAttribute("testuser") == null) {
 			User user = new User();
 			user.setFirstName("Test User");
@@ -59,7 +58,7 @@ public class ShoppingController {
 		}
 
 		try {
-			productService.save(productToBeAdded);
+			this.productService.save(productToBeAdded);
 		} catch (Exception up) {
 			System.out.println("Transaction Failed!!!");
 
@@ -70,14 +69,15 @@ public class ShoppingController {
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest) {
-		productService.findOne(productId);
+		this.productService.findOne(productId);
 		Order order = (Order) httpServletRequest.getSession().getAttribute("order");
 
-		Product findOne = productService.findOne(productId);
+		Product findOne = this.productService.findOne(productId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
-		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
+		// User user = (User)
+		// httpServletRequest.getSession().getAttribute("testuser");
 		if (order == null) {
 			order = new Order();
 
@@ -85,9 +85,10 @@ public class ShoppingController {
 		}
 		orderItem.setOrder(order);
 		order.getItems().add(orderItem);
-		user.getOrders().add(order);
+		// user.getOrders().add(order);
 
-		httpServletRequest.getSession().setAttribute("items", order.getItems());
+		// httpServletRequest.getSession().setAttribute("items",
+		// order.getItems());
 		return "redirect:/shop";
 
 	}

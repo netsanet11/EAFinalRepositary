@@ -19,7 +19,7 @@
 		</aside>
 		<aside>	
 	<p>	
-								<a href=" <spring:url value="/orders" /> "
+								<a href=" <spring:url value="/checkout" /> "
 									class="btn btn-primary"> <span class="glyphicon" /></span> Check out
 								</a>
 							</p>
