@@ -38,7 +38,7 @@
 		</div>
 	</section>
 <section>
-<p>
+<p align="right">
 								<a
 									href=" <spring:url value="/checkout/submit" /> "
 									class="btn btn-primary"> <span

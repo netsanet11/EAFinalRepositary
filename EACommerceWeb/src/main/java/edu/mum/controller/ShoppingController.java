@@ -36,8 +36,6 @@ public class ShoppingController {
 		if (httpServletRequest.getSession().getAttribute(COUNT) == null) {
 			httpServletRequest.getSession().setAttribute(COUNT, 0);
 		}
-		// httpServletRequest.getSession().setAttribute("count",
-		// order.getItems().size());
 
 		return PRODUCTS;
 	}
@@ -96,16 +94,16 @@ public class ShoppingController {
 		for (OrderItem item : items) {
 			if (item.equals(orderItem)) {
 				item.setQuantity(item.getQuantity() + 1);
-				System.out.println(item.getQuantity());
+				System.out.println("Item quantity increase " + orderItem.getQuantity());
 			} else {
 				order.getItems().add(orderItem);
 			}
 		}
+		order.getItems().add(orderItem);
 
 		httpServletRequest.getSession().setAttribute("items", order.getItems());
 		httpServletRequest.getSession().setAttribute(COUNT, order.getItems().size());
 
-		order.getItems().add(orderItem);
 		// user.getOrders().add(order);
 
 		// httpServletRequest.getSession().setAttribute("items",
