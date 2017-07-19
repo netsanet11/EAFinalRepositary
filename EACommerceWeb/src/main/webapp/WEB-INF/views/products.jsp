@@ -30,9 +30,9 @@
 							<p>${product.price}USD</p>
  							<p>
 								<a
-									href=" <spring:url value="/products/product?id=${product.id}" /> "
+									href=" <spring:url value="/products/addItem?id=${product.id}" /> "
 									class="btn btn-primary"> <span
-									class="glyphicon-info-sign glyphicon" /></span> Details
+									class="glyphicon-info-sign glyphicon" /></span> Add to Cart
 								</a>
 							</p>
 
@@ -41,6 +41,15 @@
 				</div>
 			</c:forEach>
 		</div>
+	</section>
+	<section>	
+	<p>	
+								<a
+									href=" <spring:url value="/orders" /> 
+									class="btn btn-primary"> <span
+									class="glyphicon-info-sign glyphicon" /></span> Check out
+								</a>
+							</p>
 	</section>
 </body>
 </html>

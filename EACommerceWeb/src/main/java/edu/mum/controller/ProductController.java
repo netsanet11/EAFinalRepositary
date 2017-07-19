@@ -1,5 +1,6 @@
 package edu.mum.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import edu.mum.domain.Order;
+import edu.mum.domain.OrderItem;
 import edu.mum.domain.Product;
+import edu.mum.domain.User;
 import edu.mum.service.ProductService;
+import edu.mum.service.UserService;
 
 @Controller
 @RequestMapping("/products")
@@ -21,10 +26,15 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	private UserService userService;
  
  	@RequestMapping({"","/all"})
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest httpServletRequest) {
 		model.addAttribute("products", productService.findAll());
+		User user = new User();
+		user.setFirstName("Test User");
+		httpServletRequest.getSession().setAttribute("testuser", user);
 		return "products";
 	}
 	
@@ -56,6 +66,22 @@ public class ProductController {
 		}
 		
 	   	return "redirect:/products";
+	}
+	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
+	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest){
+		productService.findOne(productId);
+		
+		Product findOne = productService.findOne(productId);
+		OrderItem orderItem = new OrderItem();
+		orderItem.setProduct(findOne);
+
+		User user = (User)httpServletRequest.getSession().getAttribute("testuser");
+		Order order = new Order();
+		orderItem.setOrder(order);
+		user.getOrders().add(order);
+		
+		return "products";
+		
 	}
 	
    
