@@ -14,20 +14,16 @@
 			<div class="container">
 				<h1>Products</h1>
 				<p>All the available products in our store</p>
+				
 				<p align="right">
-		<a href='<spring:url value="/checkout" />' class="btn btn-info btn-lg">		
-          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-        </a>
-        <span style="font-size: 12px" id=count value="${count}"></span>
+		<a href='<spring:url value="/checkout" />' class="btn btn-info btn-lg glyphicon glyphicon-shopping-cart" >Cart <span class="badge">${count}</span></a>
+		<a href="<spring:url value='/logout' />" class="btn btn-default pull-right"> Logout</a>
          </p>       	
        
 			</div>
 
 		</div>	
-		
-
-		</div>
-		</aside>
+			
 
 	</section>
 
