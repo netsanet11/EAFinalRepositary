@@ -82,8 +82,7 @@ public class ShoppingController {
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
-		// User user = (User)
-		// httpServletRequest.getSession().getAttribute("testuser");
+		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
 		if (order == null) {
 			order = new Order();
 			user.getOrders().add(order);
