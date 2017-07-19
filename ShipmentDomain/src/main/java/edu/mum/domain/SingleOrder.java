@@ -1,9 +1,6 @@
 package edu.mum.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,68 +10,69 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-//import edu.mum.validation.EmptyOrSize;
-//import edu.mum.validation.NullMinNumber;
+@Entity
+public class SingleOrder implements Serializable {
 
-
-@Entity 
-public class SingleOrder {
+	private static final long serialVersionUID = -7666145643422026254L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
- 	private long id;
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
 	@Column(length = 16)
 	private String status;
-	
-	@Column(length = 16)
-	@NotEmpty
-	private String orderNumber;
+
+	@Column
+	private Long externalId;
 
 	@Column
 	private Integer quantity;
-	@OneToOne(fetch=FetchType.EAGER,  cascade = {CascadeType.ALL})
-	@JoinColumn(name="orderId") 
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "orderId")
 	private UserInfo userInfo;
-	
- 	
-	public long getId() {
-		return id;
+
+	public void setExternalId(Long externalId) {
+		this.externalId = externalId;
 	}
+
+	public Long getExternalId() {
+		return this.externalId;
+	}
+
+	public long getId() {
+		return this.id;
+	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getStatus() {
-		return status;
+		return this.status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public Integer getQuantity() {
-		return quantity;
+		return this.quantity;
 	}
+
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public String getOrderNumber() {
-		return orderNumber;
-	}
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
-	}
+
 	public UserInfo getUserInfo() {
-		return userInfo;
+		return this.userInfo;
 	}
+
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
-	
-  }
+
+}

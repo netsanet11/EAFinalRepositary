@@ -14,25 +14,28 @@ import javax.persistence.Version;
 
 @Entity
 public class OrderItem implements Serializable {
+
+	private static final long serialVersionUID = 7483231654947224614L;
+
 	@Id
-	   @GeneratedValue(strategy = GenerationType.AUTO)
-	   @Column(name = "id", updatable = false, nullable = false)
-	   private Long id = null;
-	   @Version
-	   @Column(name = "version")
-	   private int version = 0;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id = null;
+	@Version
+	@Column(name = "version")
+	private int version = 0;
 
-	   @Column
-	   private int quantity;
+	@Column
+	private int quantity;
 
-	   @ManyToOne
-	   private Order order;
+	@ManyToOne
+	private Order order;
 
-	   @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	   private Product product;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private Product product;
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -40,7 +43,7 @@ public class OrderItem implements Serializable {
 	}
 
 	public int getVersion() {
-		return version;
+		return this.version;
 	}
 
 	public void setVersion(int version) {
@@ -48,7 +51,7 @@ public class OrderItem implements Serializable {
 	}
 
 	public int getQuantity() {
-		return quantity;
+		return this.quantity;
 	}
 
 	public void setQuantity(int quantity) {
@@ -56,7 +59,7 @@ public class OrderItem implements Serializable {
 	}
 
 	public Order getOrder() {
-		return order;
+		return this.order;
 	}
 
 	public void setOrder(Order order) {
@@ -64,7 +67,7 @@ public class OrderItem implements Serializable {
 	}
 
 	public Product getProduct() {
-		return product;
+		return this.product;
 	}
 
 	public void setProduct(Product product) {

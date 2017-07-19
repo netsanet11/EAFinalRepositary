@@ -13,9 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,51 +21,52 @@ import javax.persistence.Version;
 @Entity
 @Table(name = "purchaseOrder")
 public class Order implements Serializable {
-	  @Id
-	   @GeneratedValue(strategy = GenerationType.AUTO)
-	   @Column(name = "id", updatable = false, nullable = false)
-	   private Long id = null;
-	   @Version
-	   @Column(name = "version")
-	   private int version = 0;
 
-	   @Column
-	   private String orderNumber;
+	private static final long serialVersionUID = -3039679880818308042L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id = null;
+	@Version
+	@Column(name = "version")
+	private int version = 0;
 
-	   @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	   private Set<OrderItem> items = new HashSet<OrderItem>();
-	   
-	   @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	   @JoinColumn(name="order_id") 
-	   private Address address;
-	   
-		@ManyToOne(fetch=FetchType.EAGER)
-	    @JoinColumn (name="user_id") 
-	  	private User  user;
-	  	
-		public enum orderStatus  {INTRANSIT, DELIVERED, INPROCESS};
+	@Column
+	private String orderNumber;
 
-	 /*  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	   private Set<OrderPayment> payments = new HashSet<OrderPayment>();*/
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private Set<OrderItem> items = new HashSet<OrderItem>();
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_id")
+	private Address address;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public enum orderStatus {
+		INTRANSIT, DELIVERED, INPROCESS
+	};
 
 	public Address getAddress() {
-			return address;
-		}
+		return this.address;
+	}
 
-		public void setAddress(Address address) {
-			this.address = address;
-		}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-		public User getUser() {
-			return user;
-		}
+	public User getUser() {
+		return this.user;
+	}
 
-		public void setUser(User user) {
-			this.user = user;
-		}
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -76,7 +74,7 @@ public class Order implements Serializable {
 	}
 
 	public int getVersion() {
-		return version;
+		return this.version;
 	}
 
 	public void setVersion(int version) {
@@ -84,7 +82,7 @@ public class Order implements Serializable {
 	}
 
 	public String getOrderNumber() {
-		return orderNumber;
+		return this.orderNumber;
 	}
 
 	public void setOrderNumber(String orderNumber) {
@@ -92,29 +90,11 @@ public class Order implements Serializable {
 	}
 
 	public Set<OrderItem> getItems() {
-		return items;
+		return this.items;
 	}
 
 	public void setItems(Set<OrderItem> items) {
 		this.items = items;
 	}
-	
-	/*public Set<OrderPayment> getPayments() {
-		return payments;
-	}
 
-	public void setPayments(Set<OrderPayment> payments) {
-		this.payments = payments;
-	}
-
-	public void addOrderItem(OrderItem orderItem) {
-		this.items.add(orderItem);
-		orderItem.setOrder(this);
-	}
-
-	public void addOrderPayment(OrderPayment orderPayment) {
-		this.payments.add(orderPayment);
-		orderPayment.setOrder(this);
-	}
-*/
 }

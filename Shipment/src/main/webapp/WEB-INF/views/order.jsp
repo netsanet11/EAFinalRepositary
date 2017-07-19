@@ -27,6 +27,18 @@
 
 	<section class="container">
 		<div class="row">
+			<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
+				<div class="thumbnail">
+						<div class="caption">
+						<h3>Customer Name - ${order.userInfo.userName}</h3>
+						<p>Street -         ${order.userInfo.street}</p>
+						<p>City -       ${order.userInfo.city} </p>
+						<p>State -       ${order.userInfo.state} </p>
+						<p>ZipCode -      ${order.userInfo.zipCode} </p>
+					</div>
+				</div>
+			</div>
+		
 			<form class="form-horizontal"
 				action="<spring:url value="/orders/update"></spring:url>"
 				method="post">
@@ -38,15 +50,18 @@
 							name='id' type="text" value="${order.id}" readonly>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-lg-2" for="orderNumber">orderId</label>
-						<input id="orderNumber" class="form:input-large" placeholder="OrderNumber"
-							name='orderNumber' type="text" value="${order.orderNumber}" readonly>
+						<label class="control-label col-lg-2" for="externalId">orderId</label>
+						<input id="externalId" class="form:input-large" placeholder="externalId"
+							name='externalId' type="text" value="${order.externalId}" readonly>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-lg-2" for="quantity">Quantity</label>
 						<input id="quantity" class="form:input-large" placeholder="Quantity"
 							name='Quantity' type="text" value="${order.quantity}" readonly>
 					</div>
+					
+					<% request.setAttribute("userInfo","${order.userInfo}");
+					%>
 					<label class="control-label col-lg-2" for="status">Delivery Status</label>
 					<select id="status" name="status" class="btn btn-danger pull-left">
 
@@ -66,7 +81,7 @@
 							${order.status == 'Delivered' ? 'selected="selected"' : ''}>
 						Delivered
 				   </option>
-					</select>
+					</select> 
 					<br>
 					<hr>
 					<div class="col-lg-offset-2 col-lg-10">
