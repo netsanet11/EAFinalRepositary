@@ -10,23 +10,24 @@
 </head>
 <body>
 	<section>
-		<aside><div class="jumbotron">
+		<div class="jumbotron">
 			<div class="container">
 				<h1>Products</h1>
 				<p>All the available products in our store</p>
+				<p align="right">
+		<a href='<spring:url value="/orders" />' class="btn btn-info btn-lg">		
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+        </a>
+        <span style="font-size: 12px" id=count value="${count}"></span>
+         </p>       	
+       
 			</div>
-		</div>
-		</aside>
-		<aside>	
-	<p>	
-								<a href=" <spring:url value="/orders" /> "
-									class="btn btn-primary"> <span class="glyphicon" /></span> Check out
-								</a>
-							</p>
-	</aside>
+		</div>	
+		
 	</section>
 
 	<section class="container">
+	
 		<div class="row">
 			<c:forEach items="${products}" var="product">
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">

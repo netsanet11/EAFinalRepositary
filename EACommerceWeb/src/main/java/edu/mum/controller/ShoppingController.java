@@ -1,5 +1,7 @@
 package edu.mum.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -17,7 +19,6 @@ import edu.mum.domain.OrderItem;
 import edu.mum.domain.Product;
 import edu.mum.domain.User;
 import edu.mum.service.ProductService;
-import edu.mum.service.UserService;
 
 @Controller
 @RequestMapping("/shop")
@@ -32,8 +33,12 @@ public class ShoppingController {
 		if (httpServletRequest.getSession().getAttribute("testuser") == null) {
 			User user = new User();
 			user.setFirstName("Test User");
+			model.addAttribute("testuser", user);
+			httpServletRequest.getSession().setAttribute("count", 0);
 			httpServletRequest.getSession().setAttribute("testuser", user);
 		}
+		// httpServletRequest.getSession().setAttribute("count",
+		// order.getItems().size());
 
 		return "products";
 	}
@@ -80,14 +85,24 @@ public class ShoppingController {
 		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
 		if (order == null) {
 			order = new Order();
-
+			user.getOrders().add(order);
 			httpServletRequest.getSession().setAttribute("order", order);
 		}
 		orderItem.setOrder(order);
-		order.getItems().add(orderItem);
-		user.getOrders().add(order);
+
+		Set<OrderItem> items = order.getItems();
+
+		for (OrderItem item : items) {
+			if (item.equals(orderItem)) {
+				item.setQuantity(item.getQuantity() + 1);
+				System.out.println(item.getQuantity());
+			} else {
+				order.getItems().add(orderItem);
+			}
+		}
 
 		httpServletRequest.getSession().setAttribute("items", order.getItems());
+		httpServletRequest.getSession().setAttribute("count", order.getItems().size());
 		return "redirect:/shop";
 
 	}
