@@ -36,7 +36,8 @@ public class OrderController {
 		model.addAttribute("order", order);
 		return "order";
 	}
-	
+	@Autowired
+    SendMailExample emailService;
 	   
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String processNewShipmentForm( SingleOrder orderToBeUpdate,  Model model) {
@@ -46,8 +47,6 @@ public class OrderController {
 		System.out.println(order.getUserInfo());
 		order.setStatus(orderToBeUpdate.getStatus());
 		orderService.update(order);
-	    ApplicationContext context = new ClassPathXmlApplicationContext("context/applicationContext.xml");
-	    SendMailExample emailService = (SendMailExample) context.getBean("sendMailExample");
 	    emailService.sendMailWithTemplate("Samle", "Sample");
 
 		return "redirect:/orders";
