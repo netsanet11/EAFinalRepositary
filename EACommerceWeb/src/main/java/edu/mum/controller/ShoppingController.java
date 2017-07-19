@@ -17,6 +17,7 @@ import edu.mum.domain.OrderItem;
 import edu.mum.domain.Product;
 import edu.mum.domain.User;
 import edu.mum.service.ProductService;
+import edu.mum.service.UserService;
 
 @Controller
 @RequestMapping("/shop")
@@ -40,7 +41,7 @@ public class ShoppingController {
 	@RequestMapping("/product")
 	public String getProductById(Model model, @RequestParam("id") Long id) {
 
-		Product product = productService.findOne(id);
+		Product product = this.productService.findOne(id);
 		model.addAttribute("product", product);
 		return "product";
 	}
