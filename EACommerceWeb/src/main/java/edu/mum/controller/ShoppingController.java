@@ -17,23 +17,23 @@ import edu.mum.domain.OrderItem;
 import edu.mum.domain.Product;
 import edu.mum.domain.User;
 import edu.mum.service.ProductService;
-import edu.mum.service.UserService;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/shop")
 public class ShoppingController {
 
 	@Autowired
 	private ProductService productService;
 
-	private UserService userService;
-
 	@RequestMapping({ "", "/all" })
 	public String list(Model model, HttpServletRequest httpServletRequest) {
 		model.addAttribute("products", productService.findAll());
-		User user = new User();
-		user.setFirstName("Test User");
-		httpServletRequest.getSession().setAttribute("testuser", user);
+		if (httpServletRequest.getSession().getAttribute("testuser") == null) {
+			User user = new User();
+			user.setFirstName("Test User");
+			httpServletRequest.getSession().setAttribute("testuser", user);
+		}
+
 		return "products";
 	}
 
@@ -64,23 +64,30 @@ public class ShoppingController {
 
 		}
 
-		return "redirect:/products";
+		return "redirect:/shop";
 	}
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest) {
 		productService.findOne(productId);
+		Order order = (Order) httpServletRequest.getSession().getAttribute("order");
 
 		Product findOne = productService.findOne(productId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
 		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
-		Order order = new Order();
+		if (order == null) {
+			order = new Order();
+
+			httpServletRequest.getSession().setAttribute("order", order);
+		}
 		orderItem.setOrder(order);
+		order.getItems().add(orderItem);
 		user.getOrders().add(order);
 
-		return "redirect:/products";
+		httpServletRequest.getSession().setAttribute("items", order.getItems());
+		return "redirect:/shop";
 
 	}
 

@@ -19,10 +19,8 @@
 		</aside>
 		<aside>	
 	<p>	
-								<a
-									href=" <spring:url value="/orders" /> 
-									class="btn btn-primary"> <span
-									class="glyphicon" /></span> Check out
+								<a href=" <spring:url value="/orders" /> "
+									class="btn btn-primary"> <span class="glyphicon" /></span> Check out
 								</a>
 							</p>
 	</aside>
@@ -40,7 +38,7 @@
 							<p>${product.price}USD</p>
  							<p>
 								<a
-									href=" <spring:url value="/products/addItem?id=${product.id}" /> "
+									href=" <spring:url value="/shop/addItem?id=${product.id}" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sign glyphicon" /></span> Add to Cart
 								</a>

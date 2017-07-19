@@ -43,6 +43,9 @@ public class User implements Serializable {
 	@NotEmpty
 	private String title;
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private List<Order> orders = new ArrayList<Order>();
+
 	public String getEmail() {
 		return this.email;
 	}
@@ -70,9 +73,6 @@ public class User implements Serializable {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private List<Order> orders = new ArrayList<Order>();
 
 	public long getId() {
 		return this.id;

@@ -26,8 +26,8 @@
 		 					<a href="<spring:url value="/members/add" />" class="btn btn-default pull-right">Add Member</a>	
 		 					<a href="<spring:url value="/members" />" class="btn btn-default pull-right">Member List</a>	
 		 					<br>
-		 					<a href="<spring:url value="/products/add" />" class="btn btn-default pull-right">Add Product</a>	
-		 					<a href="<spring:url value="/products/all" />" class="btn btn-default pull-right">Product List</a>	
+		 					<a href="<spring:url value="/shop/add" />" class="btn btn-default pull-right">Add Product</a>	
+		 					<a href="<spring:url value="/shop/all" />" class="btn btn-default pull-right">Product List</a>	
 		 					<br>
 		 					<a href="<spring:url value='/logout' />" class="btn btn-default pull-right"> Logout</a>
 		 
