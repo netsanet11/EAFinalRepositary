@@ -1,5 +1,6 @@
 package edu.mum.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,56 +8,45 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import edu.mum.domain.Product;
 import edu.mum.service.ProductService;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("product")
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productService;
- 
- 	@RequestMapping({"","/all"})
-	public String list(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "products";
-	}
-	
- 	@RequestMapping("/product")
-	public String getProductById(Model model, @RequestParam("id") Long id) {
 
-		Product product = productService.findOne(id);
-		model.addAttribute("product", product);
-		return "product";
+	@RequestMapping({ "", "/all" })
+	public String list(Model model, HttpServletRequest httpServletRequest) {
+		model.addAttribute("newProduct", new Product());
+		model.addAttribute("products", this.productService.findAll());
+		return "addProduct";
 	}
 
-	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
-	   return "addProduct";
-	}
-	   
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm( @Valid @ModelAttribute("newProduct") Product productToBeAdded, BindingResult result) {
-		if(result.hasErrors()) {
-			return "addProduct";
+	@RequestMapping(method = RequestMethod.POST)
+	public String save(Model model, @Valid @ModelAttribute("newProduct") Product product, BindingResult result) {
+
+		if (!result.hasErrors()) {
+			this.productService.save(product);
+			model.addAttribute("newProduct", new Product());
+			model.addAttribute("products", this.productService.findAll());
 		}
 
- 		try {
-			productService.save(productToBeAdded);
-		} catch (Exception up) {
-	      System.out.println("Transaction Failed!!!");
- 
-		}
-		
-	   	return "redirect:/products";
+		return "addProduct";
 	}
-	
-   
+
+	@RequestMapping("delete/{id}")
+	public String delete(Model model, @PathVariable("id") Long id) {
+
+		this.productService.remove(id);
+		model.addAttribute("newProduct", new Product());
+		model.addAttribute("products", this.productService.findAll());
+		return "redirect:/product";
+	}
 }

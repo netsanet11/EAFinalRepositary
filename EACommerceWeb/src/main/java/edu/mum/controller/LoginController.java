@@ -12,7 +12,7 @@ import edu.mum.domain.UserCredential;
 import edu.mum.service.UserCredentialsService;
 
 @Controller
-@SessionAttributes("member")
+@SessionAttributes("user")
 public class LoginController {
 
 	@Autowired

@@ -11,45 +11,51 @@ import edu.mum.domain.Product;
 import edu.mum.domain.User;
 import edu.mum.service.ProductService;
 
-
 @Service
-@Transactional 
+@Transactional
 public class ProductServiceImpl implements ProductService {
-	
-	
- 	@Autowired
+
+	@Autowired
 	private ProductDao productDao;
 
-    public void save( Product product) {  		
-		productDao.save(product);
+	@Override
+	public void save(Product product) {
+		this.productDao.save(product);
 	}
-	
-	
-    public Product update(Product product) {  		
-		return productDao.update(product);
+
+	@Override
+	public Product update(Product product) {
+		return this.productDao.update(product);
 	}
-	
-	
+
+	@Override
 	public List<Product> findAll() {
-		return (List<Product>)productDao.findAll();
+		return this.productDao.findAll();
 	}
 
- 	public Product findOne(Long id) {
-		return productDao.findOne(id);
+	@Override
+	public Product findOne(Long id) {
+		return this.productDao.findOne(id);
 	}
-
 
 	@Override
 	public List<Product> findBySellerOrBuyer(Integer price, User buyer, User seller) {
-		 
-		return productDao.findBySellerOrBuyer(price, buyer, seller);
+
+		return this.productDao.findBySellerOrBuyer(price, buyer, seller);
 	}
 
+	@Override
 	public List<Product> findByCategoryName(String categoryName) {
-		return productDao.findByCategoryName(categoryName);
+		return this.productDao.findByCategoryName(categoryName);
 	}
-	
+
+	@Override
 	public List<Product> findItemCriteria(Integer initialPrice, User buyer, User seller) {
-		return productDao.findItemCriteria(initialPrice,buyer,seller);
+		return this.productDao.findItemCriteria(initialPrice, buyer, seller);
+	}
+
+	@Override
+	public void remove(Long id) {
+		this.productDao.delete(id);
 	}
 }
