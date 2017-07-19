@@ -20,7 +20,7 @@ import edu.mum.service.ProductService;
 import edu.mum.service.UserService;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/shop")
 public class ShoppingController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class ShoppingController {
 
 	@RequestMapping({ "", "/all" })
 	public String list(Model model, HttpServletRequest httpServletRequest) {
-		model.addAttribute("products", productService.findAll());
+		model.addAttribute("products", this.productService.findAll());
 		User user = new User();
 		user.setFirstName("Test User");
 		httpServletRequest.getSession().setAttribute("testuser", user);
@@ -40,7 +40,7 @@ public class ShoppingController {
 	@RequestMapping("/product")
 	public String getProductById(Model model, @RequestParam("id") Long id) {
 
-		Product product = productService.findOne(id);
+		Product product = this.productService.findOne(id);
 		model.addAttribute("product", product);
 		return "product";
 	}
@@ -58,7 +58,7 @@ public class ShoppingController {
 		}
 
 		try {
-			productService.save(productToBeAdded);
+			this.productService.save(productToBeAdded);
 		} catch (Exception up) {
 			System.out.println("Transaction Failed!!!");
 
@@ -69,9 +69,9 @@ public class ShoppingController {
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest) {
-		productService.findOne(productId);
+		this.productService.findOne(productId);
 
-		Product findOne = productService.findOne(productId);
+		Product findOne = this.productService.findOne(productId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
