@@ -4,4 +4,6 @@ import edu.mum.domain.Order;
 
 public interface OrderDao extends GenericDao<Order> {
 
+	void saveFull(Order order);
+
 }

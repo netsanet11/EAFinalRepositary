@@ -5,11 +5,12 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
@@ -31,7 +32,8 @@ public class OrderItem implements Serializable {
 	@ManyToOne
 	private Order order;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "product_id")
 	private Product product;
 
 	public Long getId() {
@@ -72,5 +74,36 @@ public class OrderItem implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + quantity;
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderItem other = (OrderItem) obj;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
+		if (quantity != other.quantity)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
 	}
 }

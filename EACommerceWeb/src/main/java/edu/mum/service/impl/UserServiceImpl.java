@@ -12,45 +12,49 @@ import edu.mum.service.UserCredentialsService;
 import edu.mum.service.UserService;
 
 @Service
-@Transactional 
+@Transactional
 public class UserServiceImpl implements UserService {
-	
- 	@Autowired
+
+	@Autowired
 	private UserDao userDao;
 
- 	@Autowired
+	@Autowired
 	private UserCredentialsService credentialsService;
 
- 	
-     public void save( User user) {  		
-  		userDao.save(user);
- 	}
-  	
-     @Override
-    	public void saveFull( User user) {  		
-   		credentialsService.save(user.getUserCredentials());
-   		userDao.save(user);
- 	}
-   	
-	
+	public void save(User user) {
+		this.userDao.save(user);
+	}
+
+	@Override
+	public void saveFull(User user) {
+		this.credentialsService.save(user.getUserCredentials());
+		this.userDao.save(user);
+	}
+
+	@Override
 	public List<User> findAll() {
-		return (List<User>)userDao.findAll();
+		return this.userDao.findAll();
 	}
 
 	public User findByEmail(String email) {
-		return userDao.findByEmail(email);
+		return this.userDao.findByEmail(email);
 	}
-	
+
 	public User update(User user) {
-		 return userDao.update(user);
+		return this.userDao.update(user);
 
 	}
 
 	@Override
 	public User findOne(Long id) {
-		 
-		return userDao.findOne(id);
+
+		return this.userDao.findOne(id);
 	}
- 
+
+	@Override
+	public User findByUsername(String name) {
+		User user = this.userDao.findByUsername(name);
+		return user;
+	}
 
 }

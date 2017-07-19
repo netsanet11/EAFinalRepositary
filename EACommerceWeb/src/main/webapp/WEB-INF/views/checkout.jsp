@@ -26,10 +26,10 @@
 					<div class="thumbnail">
 					<!-- img src="<c:url value="/resource/images/${product.productId}.png"></c:url>" alt="image"  style = "width:100%"/-->
 						<div class="caption">
-							<h3>${item.product.name}</h3>
-							<p>${item.product.description}</p>
-							<p>${item.product.price}USD</p>			
-				
+							<h3>Name: ${item.product.name}</h3>
+							<p>Description: ${item.product.description}</p>
+							<p>Price: ${item.product.price}USD</p>	
+							<p>Quantity: ${item.quantity}</p>			
 						</div>
 					</div>
 				</div>				
@@ -40,7 +40,7 @@
 <section>
 <p>
 								<a
-									href=" <spring:url value="/orders/submit" /> "
+									href=" <spring:url value="/checkout/submit" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sign glyphicon" /></span> Submit Order
 								</a>
