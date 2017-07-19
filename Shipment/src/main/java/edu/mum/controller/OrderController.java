@@ -46,7 +46,7 @@ public class OrderController {
 		order.setStatus(orderToBeUpdate.getStatus());
 
 		orderService.update(order);
-	    emailService.sendMailWithTemplate("Samle", "Sample");
+	    emailService.sendMailWithTemplate(order.getUserInfo().getUserName(), "You are welcome",order.getUserInfo().getEmail());
 
 		return "redirect:/orders";
 
