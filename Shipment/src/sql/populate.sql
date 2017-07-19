@@ -1,5 +1,5 @@
  
-INSERT INTO credentials(username,password,enabled) VALUES ('guest','guest', TRUE);
+INSERT INTO credentials(username,password,enabled) VALUES ('Sean','Sean', TRUE);
 INSERT INTO credentials(username,password,enabled) VALUES ('admin','admin', TRUE);
  
 INSERT INTO authority (username, authority) VALUES ('Paul', 'ROLE_ADMIN');
