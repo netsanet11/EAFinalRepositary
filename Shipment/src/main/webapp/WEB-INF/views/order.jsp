@@ -35,6 +35,7 @@
 						<p>City -       ${order.userInfo.city} </p>
 						<p>State -       ${order.userInfo.state} </p>
 						<p>ZipCode -      ${order.userInfo.zipCode} </p>
+						<p>E-mail  -      ${order.userInfo.email} </p>
 					</div>
 				</div>
 			</div>

@@ -23,10 +23,12 @@ public class SendMailExample {
             simpleMailMessage.setText(msg);
             mailSender.send(simpleMailMessage);
         }
-        public void sendMailWithTemplate(String dear, String content) {         
+		public void sendMailWithTemplate(String dear, String content, String email) {
             SimpleMailMessage message = new SimpleMailMessage(templateMailMessage);
+            message.setTo(email);
             message.setText(String.format( templateMailMessage.getText(), dear, content));
             mailSender.send(message);
-        }
+			
+		}
         
 }
