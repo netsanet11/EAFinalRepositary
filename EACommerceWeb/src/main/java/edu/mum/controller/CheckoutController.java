@@ -33,8 +33,6 @@ public class CheckoutController {
 
 	@RequestMapping(value = "/submit", method = RequestMethod.GET)
 	public String submitOrder(Model model, HttpServletRequest httpServletRequest) {
-		// User user = (User)
-		// httpServletRequest.getSession().getAttribute("testuser");
 		Order order = (Order) httpServletRequest.getSession().getAttribute(ORDER);
 
 		this.orderService.publishOrder(order);

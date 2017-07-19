@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 public class SingleOrder implements Serializable {
 
@@ -24,13 +22,14 @@ public class SingleOrder implements Serializable {
 	private long id;
 
 	@Column(length = 16)
-	private String status;
+	private SingleStatus status;
 
 	@Column
 	private Long externalId;
 
 	@Column
 	private Integer quantity;
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "orderId")
 	private UserInfo userInfo;
@@ -51,11 +50,11 @@ public class SingleOrder implements Serializable {
 		this.id = id;
 	}
 
-	public String getStatus() {
+	public SingleStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(SingleStatus status) {
 		this.status = status;
 	}
 

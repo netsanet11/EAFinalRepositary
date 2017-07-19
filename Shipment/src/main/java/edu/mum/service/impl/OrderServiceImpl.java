@@ -8,41 +8,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.OrderDao;
 import edu.mum.domain.SingleOrder;
-import edu.mum.service.UserCredentialsService;
+import edu.mum.service.OrderService;
 
 @Service
-@Transactional 
-public class OrderServiceImpl implements edu.mum.service.OrderService {
-	
- 	@Autowired
+@Transactional
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
 	private OrderDao orderDao;
 
- 	@Autowired
- 	UserCredentialsService credentialsService;
-
-    public void save( SingleOrder order) {  		
-		orderDao.save(order);
+	@Override
+	public void save(SingleOrder order) {
+		this.orderDao.save(order);
 	}
-	
- 	
-//    @Override
-//   	public void saveFull( Order member) {  		
-//  		credentialsService.save(member.getUserCredentials());
-//  		memberDao.save(member);
-//	}
-  	
-    @Override
-    public void update(SingleOrder singleOrder) {
-    	orderDao.update(singleOrder);
-    	return;
-    }
+
+	@Override
+	public void update(SingleOrder singleOrder) {
+		this.orderDao.update(singleOrder);
+		return;
+	}
+
+	@Override
 	public List<SingleOrder> findAll() {
-		return (List<SingleOrder>)orderDao.findAll();
+		return this.orderDao.findAll();
 	}
 
- 	public SingleOrder findOne(Long id) {
-		return orderDao.findOne(id);
+	@Override
+	public SingleOrder findOne(Long id) {
+		return this.orderDao.findOne(id);
 	}
-	
- 
+
 }

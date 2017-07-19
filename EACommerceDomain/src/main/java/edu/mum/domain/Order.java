@@ -45,9 +45,16 @@ public class Order implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public enum orderStatus {
-		INTRANSIT, DELIVERED, INPROCESS
-	};
+	@Column
+	private OrderStatus status;
+
+	public OrderStatus getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
 
 	public Address getAddress() {
 		return this.address;

@@ -37,12 +37,9 @@ public class OrderServiceImpl implements OrderService {
 		String name = auth.getName();
 
 		User user = this.userService.findByUsername(name);
-
 		user.getOrders().add(order);
 		order.setUser(user);
-
 		this.orderDao.saveFull(order);
-
 		this.template.convertAndSend("fromEAC.key", order);
 	}
 

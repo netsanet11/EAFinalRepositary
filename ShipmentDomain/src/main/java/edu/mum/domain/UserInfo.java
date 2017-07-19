@@ -29,6 +29,16 @@ public class UserInfo implements Serializable {
 	private String zipCode;
 	@Column
 	private String userName;
+	@Column
+	private String email;
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getUserName() {
 		return this.userName;

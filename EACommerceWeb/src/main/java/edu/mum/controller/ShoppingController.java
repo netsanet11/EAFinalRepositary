@@ -16,31 +16,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.domain.Order;
 import edu.mum.domain.OrderItem;
+import edu.mum.domain.OrderStatus;
 import edu.mum.domain.Product;
-import edu.mum.domain.User;
 import edu.mum.service.ProductService;
 
 @Controller
 @RequestMapping("/shop")
 public class ShoppingController {
 
+	private static final String ORDER = "order";
+	private static final String PRODUCTS = "products";
+	private static final String COUNT = "count";
 	@Autowired
 	private ProductService productService;
 
 	@RequestMapping({ "", "/all" })
 	public String list(Model model, HttpServletRequest httpServletRequest) {
-		model.addAttribute("products", this.productService.findAll());
-		if (httpServletRequest.getSession().getAttribute("testuser") == null) {
-			User user = new User();
-			user.setFirstName("Test User");
-			model.addAttribute("testuser", user);
-			httpServletRequest.getSession().setAttribute("count", 0);
-			httpServletRequest.getSession().setAttribute("testuser", user);
+		model.addAttribute(PRODUCTS, this.productService.findAll());
+		if (httpServletRequest.getSession().getAttribute(COUNT) == null) {
+			httpServletRequest.getSession().setAttribute(COUNT, 0);
 		}
 		// httpServletRequest.getSession().setAttribute("count",
 		// order.getItems().size());
 
-		return "products";
+		return PRODUCTS;
 	}
 
 	@RequestMapping("/product")
@@ -76,17 +75,19 @@ public class ShoppingController {
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String addProduct(Model model, @RequestParam("id") Long productId, HttpServletRequest httpServletRequest) {
 		this.productService.findOne(productId);
-		Order order = (Order) httpServletRequest.getSession().getAttribute("order");
+		Order order = (Order) httpServletRequest.getSession().getAttribute(ORDER);
 
 		Product findOne = this.productService.findOne(productId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProduct(findOne);
 
-		User user = (User) httpServletRequest.getSession().getAttribute("testuser");
+		// User user = (User)
+		// httpServletRequest.getSession().getAttribute("testuser");
 		if (order == null) {
 			order = new Order();
-			user.getOrders().add(order);
-			httpServletRequest.getSession().setAttribute("order", order);
+			order.setStatus(OrderStatus.UNDELIV);
+			// user.getOrders().add(order);
+			httpServletRequest.getSession().setAttribute(ORDER, order);
 		}
 		orderItem.setOrder(order);
 
@@ -102,7 +103,7 @@ public class ShoppingController {
 		}
 
 		httpServletRequest.getSession().setAttribute("items", order.getItems());
-		httpServletRequest.getSession().setAttribute("count", order.getItems().size());
+		httpServletRequest.getSession().setAttribute(COUNT, order.getItems().size());
 
 		order.getItems().add(orderItem);
 		// user.getOrders().add(order);

@@ -51,3 +51,4 @@ EACommerceWeb/target/**
 EACommerceIntegration/target/**
 ShipmentDomain/target/**
 Shipment/target/**
+Shipment/bin/**
