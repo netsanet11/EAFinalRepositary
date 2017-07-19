@@ -1,6 +1,10 @@
 package edu.mum.controller;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.domain.SingleOrder;
 import edu.mum.service.OrderService;
+import edu.mum.service.mail.SendMailExample;
 
 @Controller
 @RequestMapping({ "/orders" })
@@ -41,6 +46,9 @@ public class OrderController {
 		System.out.println(order.getUserInfo());
 		order.setStatus(orderToBeUpdate.getStatus());
 		orderService.update(order);
+	    ApplicationContext context = new ClassPathXmlApplicationContext("context/applicationContext.xml");
+	    SendMailExample emailService = (SendMailExample) context.getBean("sendMailExample");
+	    emailService.sendMailWithTemplate("Samle", "Sample");
 
 		return "redirect:/orders";
 
