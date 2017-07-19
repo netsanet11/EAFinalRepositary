@@ -65,20 +65,20 @@
 					<label class="control-label col-lg-2" for="status">Delivery Status</label>
 					<select id="status" name="status" class="btn btn-danger pull-left">
 
-						<option value="Undelivery"
-							${order.status == 'Undelivery' ? 'selected="selected"' : ''}>
-						Undelivery
+						<option value='UNDELIVEDED'
+							${order.status.getStr() == 'Undelivered' ? 'selected="selected"' : ''}>
+						Undelivered
 				   </option>
-						<option value="Delivering"
-							${order.status == 'Delivering' ? 'selected="selected"' : ''}>
-						Delivering
+						<option value='INTRANSIT'
+							${order.status.getStr() == 'Intransit' ? 'selected="selected"' : ''}>
+						Intransit
 				   </option>
-						<option value="Preparing"
-							${order.status == 'Preparing' ? 'selected="selected"' : ''}>
+						<option value='PREPARING'
+							${order.status.getStr() == 'Preparing' ? 'selected="selected"' : ''}>
 						Preparing
 				   </option>
-						<option value="Delivered"
-							${order.status == 'Delivered' ? 'selected="selected"' : ''}>
+						<option value='DELIVERED'
+							${order.status.getStr() == 'Delivered' ? 'selected="selected"' : ''}>
 						Delivered
 				   </option>
 					</select> 

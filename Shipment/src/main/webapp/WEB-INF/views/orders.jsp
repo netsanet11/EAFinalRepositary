@@ -41,7 +41,7 @@
 					<div class="thumbnail">
  						<div class="caption">
 							<h4>Order Name - ${order.externalId}</h4>
-							<h4>Order Status -  ${order.status}
+							<h4>Order Status -  ${order.status.getStr()}
 						 <a href="<spring:url value="/orders/${order.id}" />" class="btn btn-primary  btn-mini  ">View</a>
  				</h4>
  					</div>

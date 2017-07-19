@@ -42,10 +42,9 @@ public class OrderController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String processNewShipmentForm( SingleOrder orderToBeUpdate,  Model model) {
  
-		System.out.println(order.getQuantity());
-		System.out.println(order.getStatus());
-		System.out.println(order.getUserInfo());
+		System.out.println(order.getStatus().getStr());	
 		order.setStatus(orderToBeUpdate.getStatus());
+
 		orderService.update(order);
 	    emailService.sendMailWithTemplate("Samle", "Sample");
 
