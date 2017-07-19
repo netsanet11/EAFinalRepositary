@@ -14,10 +14,13 @@
 	<!-- *********** DIRECT EXCHANGE ***************** -->
 
 	<rabbit:queue name="toShipment" durable="true" />
+	<rabbit:queue name="fromShipment" durable="true" />
+	
 
 	<rabbit:direct-exchange name="testExchange" durable="true">
 		<rabbit:bindings>
 			<rabbit:binding queue="toShipment" key="toShipment.key"></rabbit:binding>
+			<rabbit:binding queue="fromShipment" key="fromShipment.key"></rabbit:binding>
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 	<!-- **************** DIRECT CONSUMER ************************* -->
@@ -26,6 +29,12 @@
 		<rabbit:listener ref="orderListener" method="listen" queue-names="toShipment" />
 	</rabbit:listener-container>
 	
-	<bean class="edu.mum.listener.OrderListener" id="orderListener"></bean>
+	<bean class="edu.mum.listener.SingleOrderListener" id="orderListener"></bean>
+	
+	<!-- **************** DIRECT PRODUCER  -->
+ 
+     <rabbit:template id="directTemplate" connection-factory="connectionFactory"
+                     reply-timeout="2000"
+                     exchange="testExchange" />
 
 </beans>

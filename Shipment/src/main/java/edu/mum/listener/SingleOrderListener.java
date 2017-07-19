@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.mum.domain.SingleOrder;
 import edu.mum.service.OrderService;
 
-public class OrderListener {
+public class SingleOrderListener {
 
 	@Autowired
 	private OrderService orderService;

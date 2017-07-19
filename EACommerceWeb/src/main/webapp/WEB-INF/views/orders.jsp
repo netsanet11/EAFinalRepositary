@@ -23,9 +23,14 @@
 			<div class="container">
 				<h1>Order: <c:out value="${order.orderNumber}" /></h1>
 				<br/>
-				Address: 
-				<c:out value="${order.address.street}" /> 
-				<c:out value="${order.address.city}" /> - <c:out value="${order.address.state}" /> 
+				<p>
+					Address: 
+					<c:out value="${order.address.street}" /> 
+					<c:out value="${order.address.city}" /> - <c:out value="${order.address.state}" /> 
+				</p>
+				<p>
+					<c:out value="${order.status}" /> 
+				</p>
 				
 				<table class="table">
 					<thead>

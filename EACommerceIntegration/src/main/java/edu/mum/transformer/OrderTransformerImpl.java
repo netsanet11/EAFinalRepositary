@@ -57,7 +57,7 @@ public class OrderTransformerImpl implements OrderTransformer {
 
 	public Order transformToEac(SingleOrder singleOrder) {
 		Order order = new Order();
-
+		System.out.println("asd");
 		order.setId(singleOrder.getExternalId());
 		order.setStatus(transformToEAC(singleOrder.getStatus()));
 		return order;

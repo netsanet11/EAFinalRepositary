@@ -18,6 +18,7 @@ import edu.mum.service.OrderService;
 import edu.mum.service.UserService;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
@@ -44,7 +45,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	@Transactional
 	public void save(Order order) {
 		this.orderDao.saveFull(order);
 	}
@@ -52,5 +52,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> findAll() {
 		return this.orderDao.findAll();
+	}
+
+	@Override
+	public Order findById(Long id) {
+		return this.orderDao.findOne(id);
+	}
+
+	@Override
+	public void update(Order o) {
+		this.orderDao.update(o);
 	}
 }

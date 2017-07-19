@@ -14,18 +14,26 @@
  
 <!-- *********** DIRECT EXCHANGE ***************** -->
 
-	<rabbit:queue name="inQueue" durable="true"/>
+	<rabbit:queue name="fromEAC" durable="true"/>
 
 	 <rabbit:direct-exchange name="testExchange" durable="true">
-	  <rabbit:bindings>
-	   <rabbit:binding queue="inQueue" key="in.key"></rabbit:binding>
-	  </rabbit:bindings>
-	 </rabbit:direct-exchange>
+		<rabbit:bindings>
+			<rabbit:binding queue="fromEAC" key="fromEAC.key"></rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
 
 <!-- **************** DIRECT PRODUCER  -->
  
      <rabbit:template id="directTemplate" connection-factory="connectionFactory"
                      reply-timeout="2000"
                      exchange="testExchange" />
+                     
+<!-- **************** DIRECT CONSUMER ************************* -->
+
+	<rabbit:listener-container connection-factory="connectionFactory">
+		<rabbit:listener ref="orderListener" method="orde" queue-names="toEAC" />
+	</rabbit:listener-container>
+	
+	<bean class="edu.mum.listener.OrderListener" id="orderListener"></bean>
  
 </beans>

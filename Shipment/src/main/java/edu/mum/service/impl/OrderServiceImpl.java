@@ -2,7 +2,9 @@ package edu.mum.service.impl;
 
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,10 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
 
+	@Autowired
+	@Qualifier("directTemplate")
+	private RabbitTemplate template;
+
 	@Override
 	public void save(SingleOrder order) {
 		this.orderDao.save(order);
@@ -25,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void update(SingleOrder singleOrder) {
 		this.orderDao.update(singleOrder);
+		this.template.convertAndSend("fromShipment.key", singleOrder);
 		return;
 	}
 
