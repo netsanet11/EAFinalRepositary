@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 public class Address implements Serializable {
@@ -19,9 +23,16 @@ public class Address implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@NotEmpty
 	private String street;
+
+	@NotEmpty
 	private String city;
+
+	@Size(min = 2, max = 3, message = "{size.address.state}")
 	private String state;
+
+	@NumberFormat
 	private String zipCode;
 
 	@ManyToOne(fetch = FetchType.EAGER)

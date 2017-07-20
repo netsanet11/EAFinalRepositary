@@ -5,7 +5,7 @@ INSERT INTO product VALUES(3,'brand new','Shorts',25.99,'p321');
  INSERT INTO usercredential VALUES ('Paul','','$2a$10$cbn04TjztMMe9iQiIk3tT.sv3HBDg8FGnlO8UIlaKtP5PtiNVqPka',NULL);
  INSERT INTO usercredential VALUES ('Sean','','$2a$10$q2mJubO41mryHffrWrEi6e63BDdCgcadq36pXUXnBunZUxDq96Atu',NULL);
  
-INSERT INTO authority (username, authority) VALUES ('guest', 'ROLE_ADMIN');
+INSERT INTO authority (username, authority) VALUES ('guest', 'ROLE_USER');
 INSERT INTO authority (username, authority) VALUES ('Paul', 'ROLE_USER');
 INSERT INTO authority (username, authority) VALUES ('Sean', 'ROLE_ADMIN');
  
