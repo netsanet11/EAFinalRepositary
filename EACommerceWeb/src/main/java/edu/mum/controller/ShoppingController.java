@@ -88,18 +88,19 @@ public class ShoppingController {
 		orderItem.setOrder(order);
 
 		Set<OrderItem> items = order.getItems();
-
+		boolean flag = false;
 		for (OrderItem item : items) {
-			if (item.equals(orderItem)) {
-				orderItem.setQuantity(orderItem.getQuantity() + 1);
-				System.out.println("Item quantity increase " + orderItem.getQuantity());
-			} else {
-				orderItem.setQuantity(1);
-				// order.getItems().add(orderItem);
-
+			if (item.getProduct().equals(orderItem.getProduct())) {
+				flag = true;
+				item.setQuantity(item.getQuantity() + 1);
+				System.out.println("Item quantity increase " + item.getQuantity());
 			}
 		}
-		order.getItems().add(orderItem);
+		if (!flag) {
+			orderItem.setQuantity(1);
+			// order.getItems().add(orderItem);\
+			order.getItems().add(orderItem);
+		}
 
 		httpServletRequest.getSession().setAttribute("items", order.getItems());
 		httpServletRequest.getSession().setAttribute(COUNT, order.getItems().size());
