@@ -31,7 +31,6 @@ public class UserCredential implements Serializable {
 	Boolean enabled;
 
 	@OneToOne(mappedBy = "userCredentials", cascade = CascadeType.PERSIST)
-	// @JsonManagedReference
 	@JsonIgnoreProperties(value = "userCredentials")
 	private User user;
 

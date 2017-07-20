@@ -18,6 +18,7 @@ public class Authority implements Serializable {
 	private long id;
 
 	private String username;
+
 	@Column(nullable = false)
 	private String authority;
 
