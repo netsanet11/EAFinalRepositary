@@ -13,7 +13,7 @@
 			<div class="container">
 				<h1> ${greeting} </h1>
 				<p> ${tagline} </p>
-  					Welcome  ${user.firstName} !
+  					<img src="<spring:url value="/resource/images/shopping.jpg"  htmlEscape="true" />" alt="Page not found  JSP!!!"  />
  
 			</div>	 
  
@@ -33,9 +33,7 @@
 		 
  					    </c:otherwise>
 					</c:choose>	
- 					 <a href="<spring:url value='/members' />" class="btn btn-default">
-						<span class="glyphicon-hand-left glyphicon"></span> Go to Community
-					</a>
+ 					 
 				</div>	
 	 			<div class="pull-left"> <h3>${SpecialBlurb}</h3> </div>
 		</div>	

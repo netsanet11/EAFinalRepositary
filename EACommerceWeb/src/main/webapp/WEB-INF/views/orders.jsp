@@ -16,6 +16,21 @@
 				<h1>Orders</h1>
 			</div>
 		</div>
+		<div class="container">
+					<a href='<spring:url value="/shop" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Shop 
+        			</a>
+        			<a href='<spring:url value="/product" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Manage products 
+        			</a>
+        			<a href='<spring:url value="/#" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Welcome 
+        			</a>
+        			<a href='<spring:url value="/logout" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Logout 
+        			</a>
+ 					
+				</div>	
 	</section>
 	
 	<section>
@@ -29,7 +44,8 @@
 					<c:out value="${order.address.city}" /> - <c:out value="${order.address.state}" /> 
 				</p>
 				<p>
-					<c:out value="${order.status}" /> 
+				Status: 
+					<c:out value="${order.status.longName()}" /> 
 				</p>
 				
 				<table class="table">

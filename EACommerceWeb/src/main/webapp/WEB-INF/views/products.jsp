@@ -17,10 +17,25 @@
 				
 				<p align="right">
 		<a href='<spring:url value="/checkout" />' class="btn btn-info btn-lg glyphicon glyphicon-shopping-cart" >Cart <span class="badge">${count}</span></a>
-		<a href="<spring:url value='/logout' />" class="btn btn-default pull-right"> Logout</a>
          </p>       	
        
 			</div>
+			
+			<div class="container">
+					<a href='<spring:url value="/shop" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Shop 
+        			</a>
+        			<a href='<spring:url value="/product" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Manage products 
+        			</a>
+        			<a href='<spring:url value="/#" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Welcome 
+        			</a>
+        			<a href='<spring:url value="/logout" />' class="btn btn-info btn-lg">		
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Logout 
+        			</a>
+ 					
+				</div>	
 
 		</div>	
 			
