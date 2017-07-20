@@ -33,10 +33,8 @@ public class User implements Serializable {
 	private String firstName;
 
 	@Column(length = 16)
-	// @EmptyOrSize(min=5, max = 9, message= "{EmptyOrSize}")
 	private String lastName;
 
-	// @NullMinNumber(value=6)
 	private Integer age;
 
 	@Column(length = 32)
