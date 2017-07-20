@@ -1,6 +1,7 @@
 package edu.mum.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.domain.SingleOrder;
 import edu.mum.service.OrderService;
+import edu.mum.service.mail.SendMailExample;
 
 @Controller
 @RequestMapping({ "/orders" })
@@ -16,6 +18,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private SendMailExample emailService;
 
 	private SingleOrder order;
 
@@ -39,7 +44,11 @@ public class OrderController {
 		this.order.setStatus(orderToBeUpdate.getStatus());
 
 		this.orderService.update(this.order);
-
+		try {
+			emailService.sendMailWithTemplate(order.getUserInfo().getUserName(), "You are welcome",order.getUserInfo().getEmail());
+		} catch (MailSendException e) {
+			e.printStackTrace();
+		}
 		return "redirect:/orders";
 
 	}
